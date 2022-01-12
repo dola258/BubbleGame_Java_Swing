@@ -1,4 +1,4 @@
-package bubbleGame.bubbleGame.test.ex00;
+package bubbleGame.test.ex00;
 
 import lombok.Getter;
 import lombok.Setter;
