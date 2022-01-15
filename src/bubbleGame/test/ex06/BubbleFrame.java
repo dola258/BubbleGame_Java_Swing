@@ -22,7 +22,7 @@ public class BubbleFrame extends JFrame {
 	}
 	
 	private void initObject() {
-		backgroundMap = new JLabel(new ImageIcon("image/test.png"));
+		backgroundMap = new JLabel(new ImageIcon("image/BackgroundMap.png"));
 
 	//	크기 조절
 	//	backgroundMap.setSize(1000,600); 
