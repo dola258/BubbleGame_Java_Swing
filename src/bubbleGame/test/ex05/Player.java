@@ -1,5 +1,7 @@
 
-package bubbleGame.test.ex04;
+package bubbleGame.test.ex05;
+
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,6 +24,10 @@ public class Player extends JLabel implements Moveable {
 	private boolean right;
 	private boolean up;
 	private boolean down;
+	
+	// 플레이어 속도 상태
+	private final int SPEED = 4;
+	private final int JUMPSPEED = 2; // UP, DOWN의 스피드
 	
 	private ImageIcon playerR, playerL;
 
@@ -57,7 +63,7 @@ public class Player extends JLabel implements Moveable {
 		new Thread(() -> {
 			while(left) {
 				setIcon(playerL);
-				x = x - 1;
+				x = x - SPEED;
 				setLocation(x, y);
 				try {
 					Thread.sleep(10); // 0.01초
@@ -75,7 +81,7 @@ public class Player extends JLabel implements Moveable {
 		new Thread(() -> {
 			while(right) {
 				setIcon(playerR);
-				x = x + 1;
+				x = x + SPEED;
 				setLocation(x, y);
 				try {
 					Thread.sleep(10); // 0.01초
@@ -86,14 +92,44 @@ public class Player extends JLabel implements Moveable {
 		}).start();
 	}
 
+	// left + up (왼쪽으로 가면서 점프), right + up (오른쪽으로 가면서 점프)
 	@Override
 	public void up() {
-
+		System.out.println("up");
+		up = true;
+		new Thread(() -> {
+			for(int i=0; i<130/JUMPSPEED; i++) { // JUMPSPEED가 1일 때 130이 가장 적당했다
+				y = y - JUMPSPEED; // 점프를 하면 y좌표는 -가 된다! 
+				setLocation(x, y);
+				try {
+					Thread.sleep(10); // 0.01초
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			up = false;
+			down();
+		}).start();
 	}
 
 	@Override
 	public void down() {
-
+		System.out.println("down");
+		down = true;
+		new Thread(() -> {
+			for(int i=0; i<130/JUMPSPEED; i++) {
+				y = y + JUMPSPEED; 
+				setLocation(x, y);
+				try {
+					Thread.sleep(10); // 0.01초
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			down = false;
+			
+		}).start();
 	}
-
 }

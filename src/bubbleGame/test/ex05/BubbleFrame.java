@@ -1,4 +1,4 @@
-package bubbleGame.test.ex04;
+package bubbleGame.test.ex05;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -51,8 +51,6 @@ public class BubbleFrame extends JFrame {
 			// 키보드가 눌러졌을 때 이벤트 핸들러
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.println(e.getKeyCode());
-				
 				switch(e.getKeyCode()) {
 				case KeyEvent.VK_LEFT:
 					if(!player.isLeft()) {
@@ -65,7 +63,9 @@ public class BubbleFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_UP:
-					player.up();
+					if(!player.isUp() && !player.isDown()) {
+						player.up();
+					}
 					break;
 				}
 			}
