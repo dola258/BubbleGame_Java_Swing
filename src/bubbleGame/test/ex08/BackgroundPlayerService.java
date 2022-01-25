@@ -33,13 +33,19 @@ public class BackgroundPlayerService implements Runnable{
 		//	System.out.println("왼쪽 색상 : " + leftcolor);
 		//	System.out.println("오른쪽 색상 : " + rightcolor);
 			
-			int bottomColor = image.getRGB(player.getX(), player.getY() + 50 + 5);
+			// 캐릭터 아래에서 좌우로 조금 좁게
+			int bottomColor = image.getRGB(player.getX() + 10, player.getY() + 50 + 5)
+					+ image.getRGB(player.getX() + 50 - 10, player.getY() + 50 + 5);
 			
 			// 바닥 충돌 확인
-			if(bottomColor != 1) {
-				System.out.println(bottomColor);
-				System.out.println("바닥에 충돌함!!!");
+			if(bottomColor != -2) {
+			//	System.out.println(bottomColor);
+			//	System.out.println("바닥에 충돌함!!!");
 				player.setDown(false);
+			} else {
+				if(!player.isUp() && !player.isDown()) {
+					player.down();
+				}
 			}
 			
 			// 좌우 외벽 충돌 확인

@@ -71,7 +71,7 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void left() {
-		System.out.println("left");
+	//	System.out.println("left");
 		left = true;
 		new Thread(() -> {
 			while(left) {
@@ -89,7 +89,7 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void right() {
-		System.out.println("right");
+	//	System.out.println("right");
 		right = true;
 		new Thread(() -> {
 			while(right) {
@@ -108,7 +108,7 @@ public class Player extends JLabel implements Moveable {
 	// left + up (왼쪽으로 가면서 점프), right + up (오른쪽으로 가면서 점프)
 	@Override
 	public void up() {
-		System.out.println("up");
+	//	System.out.println("up");
 		up = true;
 		new Thread(() -> {
 			for(int i=0; i<130/JUMPSPEED; i++) { // JUMPSPEED가 1일 때 130이 가장 적당했다
@@ -128,10 +128,11 @@ public class Player extends JLabel implements Moveable {
 
 	@Override
 	public void down() {
-		System.out.println("down");
+	//	System.out.println("down");
 		down = true;
 		new Thread(() -> {
-			for(int i=0; i<130/JUMPSPEED; i++) {
+			while(down
+					) {
 				y = y + JUMPSPEED; 
 				setLocation(x, y);
 				try {
